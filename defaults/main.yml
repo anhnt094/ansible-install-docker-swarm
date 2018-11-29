@@ -1,2 +1,4 @@
 ---
 swarm_mode: false
+all_hosts: 0.0.0.0/0
+ 
