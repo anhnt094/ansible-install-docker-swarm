@@ -3,8 +3,10 @@
   command: docker -v
   register: docker_installed_check
   ignore_errors: yes
- 
-#- include_tasks: uninstall_old_docker.yml
+
+- include_tasks: setup_repo.yml
+  when: docker_installed_check is failed
+
 - include_tasks: copy_source.yml
   when: docker_installed_check is failed
 

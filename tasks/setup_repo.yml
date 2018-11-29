@@ -1,0 +1,7 @@
+---
+- name: Set up the repository
+  yum:
+    name: [yum-utils, device-mapper-persistent-data, lvm2]
+    state: latest
+- name: add repo
+  shell: yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
