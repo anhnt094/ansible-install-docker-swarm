@@ -32,7 +32,7 @@
     msg: "Docker swarm: no"
   when: docker_swarm_mode_check is failed
 
-- name: Debug2
+- name: List all swarm node
   debug:
-    msg: "Docker swarm: yes"
+    msg: "{{ docker_swarm_mode_check.stdout_lines }}"
   when: docker_swarm_mode_check is changed
