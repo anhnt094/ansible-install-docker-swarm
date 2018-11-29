@@ -21,3 +21,18 @@
     name: docker
     state: started
     enabled: yes
+
+- name: Check docker swarm mode
+  command: docker node ls
+  register: docker_swarm_mode_check
+  ignore_errors: yes
+
+- name: Debug
+  debug:
+    msg: "Docker swarm: no"
+  when: docker_swarm_mode_check is failed
+
+- name: Debug2
+  debug:
+    msg: "Docker swarm: yes"
+  when: docker_swarm_mode_check is changed
