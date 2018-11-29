@@ -1,38 +1,35 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+Install docker. 
+Allow firewall to only swarm nodes if swarm_mode is set to TRUE.
 
-Requirements
-------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
-
-Role Variables
---------------
-
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
-
-Dependencies
-------------
-
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
-
-Example Playbook
+Using with playbook
 ----------------
 
 Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
-    - hosts: servers
+    - hosts: all
+      vars:
+        list_of_ips: "{{ groups['all'] | map('extract', hostvars, ['ansible_default_ipv4', 'address']) | join(',') }}"
+      
       roles:
-         - { role: username.rolename, x: 42 }
+         - { role: docker-for-centos, swarm_mode: true, all_hosts: "{{ list_of_ips }}" }
 
-License
--------
+Host defilement example
+----------------
 
-BSD
+[machine-2]
+192.168.122.98
 
-Author Information
-------------------
+[machine-2:vars]
+ansible_ssh_user=root
+ansible_ssh_pass=1
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+[centos-7]
+192.168.122.40
+
+[centos-7:vars]
+ansible_ssh_user=root
+ansible_ssh_pass=1
