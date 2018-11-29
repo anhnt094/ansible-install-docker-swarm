@@ -8,7 +8,6 @@ Allow firewall to only swarm nodes if swarm_mode is set to TRUE.
 Using with playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
     - hosts: all
       vars:
