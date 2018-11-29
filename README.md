@@ -1,4 +1,4 @@
-Role Name
+Description
 =========
 
 Install docker. 
@@ -19,16 +19,16 @@ Using with playbook
 Host defilement example
 ----------------
 
-[machine-2]
-192.168.122.98
-
-[machine-2:vars]
-ansible_ssh_user=root
-ansible_ssh_pass=1
-
-[centos-7]
-192.168.122.40
-
-[centos-7:vars]
-ansible_ssh_user=root
-ansible_ssh_pass=1
+    [machine-2]
+    192.168.122.98
+    
+    [machine-2:vars]
+    ansible_ssh_user=root
+    ansible_ssh_pass=1
+    
+    [centos-7]
+    192.168.122.40
+    
+    [centos-7:vars]
+    ansible_ssh_user=root
+    ansible_ssh_pass=1
