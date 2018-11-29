@@ -24,14 +24,20 @@
 
 - name: Check docker swarm mode
   debug:
-    msg: "This is swarm mode docker !"
-  when: swarm_mode == "yes"
+    msg: "swarm_mode is set to TRUE !"
+  when: swarm_mode == true
+
+- name: Check docker swarm mode
+  debug:
+    msg: "swarm_mode is set to FALSE !"
+  when: swarm_mode == false
 
 - name: List all swarm mode
   command: docker node ls
   register: nodes
+  when: swarm_mode == true
 
 - name: List all swarm node 2
   debug:
     msg: "{{ nodes.stdout_lines }}"
-  when: swarm_mode == "yes"
+  when: swarm_mode == true
