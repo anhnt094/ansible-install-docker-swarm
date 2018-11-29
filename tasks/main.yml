@@ -1,11 +1,8 @@
 ---
 - include_tasks: uninstall_old_docker.yml
 - include_tasks: copy_source.yml
-
-#- name: Install Docker
-#  yum:
-#    name: docker-ce-18.09.0
-#    state: latest
+- include_tasks: install_docker.yml
+- include_tasks: install_docker_compose.yml
 
 - name: Start Docker
   service: 
