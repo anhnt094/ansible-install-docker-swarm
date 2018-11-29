@@ -1,10 +1,21 @@
 ---
-- include_tasks: uninstall_old_docker.yml
+- name: Check if docker is installed
+  command: docker -v
+  register: docker_installed_check
+  ignore_errors: yes
+ 
+#- include_tasks: uninstall_old_docker.yml
 - include_tasks: copy_source.yml
+  when: docker_installed_check is failed
+
 - include_tasks: install_docker.yml
+  when: docker_installed_check is failed
+
 - include_tasks: install_docker_compose.yml
+  when: docker_installed_check is failed
 
 - name: Start Docker
-  service: 
+  systemd: 
     name: docker
     state: started
+    enabled: yes
