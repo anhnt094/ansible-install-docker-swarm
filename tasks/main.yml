@@ -36,8 +36,12 @@
   command: docker node ls
   register: nodes
   when: swarm_mode == true
+  ignore_errors: yes
 
 - name: List all swarm node 2
   debug:
     msg: "{{ nodes.stdout_lines }}"
+  when: nodes is not failed
+
+- include_tasks: allow_firewall.yml
   when: swarm_mode == true

@@ -1,0 +1,34 @@
+---
+- name: Allow TCP port 2376, 2377, 7946
+  iptables:
+    action: insert
+    chain: INPUT
+    protocol: tcp
+    source: "{{ item.0 }}"
+    destination_port: "{{ item.1 }}"
+    ctstate: NEW
+    jump: ACCEPT
+    comment: Accept Docker Swarm Connections.
+  with_nested:
+    - "{{ all_hosts }}"
+    - [2376, 2377, 7946]
+  register: iptable_tcp_ports_check
+
+- name: Allow UDP port 4789, 7946
+  iptables:
+    action: insert
+    chain: INPUT
+    protocol: udp
+    source: "{{ item.0 }}"
+    destination_port: "{{ item.1 }}"
+    ctstate: NEW
+    jump: ACCEPT
+    comment: Accept Docker Swarm Connections.
+  with_nested:
+    - "{{ all_hosts }}"
+    - [4789, 7946]
+  register: iptable_udp_ports_check
+
+- name: save iptables
+  command: service iptables save warn=False
+  when: iptable_tcp_ports_check is changed or iptable_udp_ports_check is changed
