@@ -4,6 +4,13 @@ Description
 Install docker. 
 Allow firewall to only swarm nodes if swarm_mode is set to TRUE.
 
+Creating role
+----------------
+
+
+    ansible-galaxy init docker-for-centos
+
+
 
 Using with playbook
 ----------------
