@@ -1,4 +1,4 @@
 ---
 swarm_mode: false
 all_hosts: 0.0.0.0/0
- 
+local_ip: 127.0.0.1 

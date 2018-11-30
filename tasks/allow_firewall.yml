@@ -32,3 +32,11 @@
 - name: save iptables
   command: service iptables save warn=False
   when: iptable_tcp_ports_check is changed or iptable_udp_ports_check is changed
+
+- name: Delete "Allow localhost" iptables rules
+  command: sed -i '/-A INPUT -s {{ local_ip[0] }}/d' /etc/sysconfig/iptables warn=False
+
+- name: Restart iptables
+  service:
+    name: iptables
+    state: restarted
