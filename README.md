@@ -14,7 +14,7 @@ Using with playbook
         list_of_ips: "{{ groups['all'] | map('extract', hostvars, ['ansible_default_ipv4', 'address']) | join(',') }}"
       
       roles:
-         - { role: docker-for-centos, swarm_mode: true, all_hosts: "{{ list_of_ips }}" }
+         - { role: docker-for-centos, swarm_mode: true, all_hosts: "{{ list_of_ips }}", local_ip: "{{ groups[_group_names[0]] }}" }
 
 Host defilement example
 ----------------
